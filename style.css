@@ -1,0 +1,599 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url("imagens/windows11.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+#loader {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+#loader.saindo {
+    opacity: 0;
+}
+
+#logo {
+    position: absolute;
+    top: calc(50% - 150px);
+    left: 50%;
+    width: 100px;
+    max-width: 25vw;
+    height: auto;
+    transform: translateX(-50%);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+#logo.logo-saindo {
+    opacity: 0;
+    transform:
+        translateX(-50%)
+        scale(1.15);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #111;
+    border-top: 5px solid #f3f3f3;
+    border-radius: 50%;
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#conteudo {
+    width: 100%;
+    height: 100%;
+}
+
+.explorer {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 90px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+}
+
+.explorer img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.explorer span {
+    font-size: 12px;
+    text-align: center;
+    text-shadow:
+        1px 1px 3px #000;
+}
+
+.explorer:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.explorer:active {
+    transform: scale(0.95);
+}
+
+#explorer-window,
+#cmd-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: min(700px, calc(100vw - 40px));
+    height: min(450px, calc(100vh - 100px));
+    min-width: 0;
+    min-height: 0;
+    transform:
+        translate(-50%, -50%)
+        scale(0.9);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s;
+}
+
+#explorer-window.aberto,
+#cmd-window.aberto {
+    opacity: 1;
+    visibility: visible;
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+#explorer-window {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 10px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 5500;
+}
+
+.explorer-header {
+    height: 45px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f3f3;
+    color: #222;
+    font-size: 14px;
+    cursor: move;
+    user-select: none;
+}
+
+#fechar-explorer {
+    border: none;
+    background: transparent;
+    color: #222;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+#fechar-explorer:hover {
+    background: #e81123;
+    color: white;
+}
+
+.explorer-content {
+    height: calc(100% - 45px);
+    padding: 25px;
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(100px, 1fr));
+    align-content: start;
+    gap: 25px;
+    overflow-y: auto;
+    color: #222;
+}
+
+.skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.skill:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+}
+
+.skill img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.skill span {
+    font-size: 13px;
+}
+
+#cmd-window {
+    background: #0c0c0c;
+    border-radius: 8px;
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.6);
+    color: white;
+    z-index: 6000;
+}
+
+.cmd-header {
+    height: 38px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #181818;
+    color: white;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    font-size: 13px;
+    cursor: move;
+    user-select: none;
+}
+
+#fechar-cmd {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#fechar-cmd:hover {
+    background: #e81123;
+}
+
+#cmd-output {
+    height: calc(100% - 78px);
+    padding: 15px;
+    overflow-y: auto;
+    color: #eeeeee;
+    font-family:
+        "Consolas",
+        "Courier New",
+        monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#cmd-input-line {
+    height: 40px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: white;
+    font-family:
+        "Consolas",
+        "Courier New",
+        monospace;
+    font-size: 14px;
+}
+
+#cmd-input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family:
+        "Consolas",
+        "Courier New",
+        monospace;
+    font-size: 14px;
+}
+
+.cmd-green {
+    color: #00ff66;
+}
+
+.cmd-blue {
+    color: #4da6ff;
+}
+
+.cmd-yellow {
+    color: #ffd43b;
+}
+
+.cmd-red {
+    color: #ff5555;
+}
+
+#taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        rgba(20, 20, 20, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top:
+        1px solid rgba(255, 255, 255, 0.08);
+    z-index: 5000;
+}
+
+.taskbar-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.taskbar-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+}
+
+.taskbar-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.taskbar-icon:hover {
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+.taskbar-icon:active {
+    transform: scale(0.9);
+}
+
+.cmd-icon {
+    color: #fff;
+    font-family:
+        "Consolas",
+        monospace;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.taskbar-right {
+    position: absolute;
+    right: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.system-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    color: white;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    #explorer-window,
+    #cmd-window {
+        width: calc(100vw - 30px);
+        height: calc(100vh - 100px);
+    }
+
+    .explorer {
+        top: 15px;
+        left: 15px;
+        width: 80px;
+    }
+
+    .explorer img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .explorer-content {
+        grid-template-columns:
+            repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .skill img {
+        width: 55px;
+        height: 55px;
+    }
+
+    #cmd-output {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    #cmd-input-line {
+        font-size: 13px;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #taskbar {
+        height: 55px;
+    }
+
+    .taskbar-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .taskbar-icon img {
+        width: 27px;
+        height: 27px;
+    }
+
+    .taskbar-center {
+        gap: 2px;
+    }
+
+    .taskbar-right {
+        display: none;
+    }
+
+    #explorer-window,
+    #cmd-window {
+        width: calc(100vw - 16px);
+        height: calc(100vh - 75px);
+        top: calc(50% - 5px);
+        border-radius: 7px;
+    }
+
+    .explorer-header,
+    .cmd-header {
+        height: 42px;
+        padding: 0 10px;
+    }
+
+    .explorer-content {
+        grid-template-columns:
+            repeat(2, 1fr);
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .skill {
+        padding: 12px 5px;
+    }
+
+    .skill img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill span {
+        font-size: 12px;
+    }
+
+    #cmd-output {
+        height: calc(100% - 82px);
+        padding: 10px;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    #cmd-input-line {
+        height: 40px;
+        padding: 0 10px;
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    #cmd-input {
+        font-size: 12px;
+    }
+
+    #logo {
+        width: 80px;
+        top: calc(50% - 120px);
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 4px;
+    }
+}
+
+@media (max-width: 360px) {
+    .explorer {
+        top: 8px;
+        left: 8px;
+        width: 70px;
+    }
+
+    .explorer img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .explorer span {
+        font-size: 10px;
+    }
+
+    #explorer-window,
+    #cmd-window {
+        width: calc(100vw - 10px);
+        height: calc(100vh - 65px);
+    }
+
+    .explorer-content {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .taskbar-right {
+        display: none;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    #explorer-window,
+    #cmd-window {
+        height: calc(100vh - 70px);
+        width: calc(100vw - 30px);
+    }
+
+    #taskbar {
+        height: 48px;
+    }
+
+    .taskbar-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

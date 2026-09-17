@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Windows 11 - GVFB Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div id="loader">
+        <img
+            id="logo"
+            src="imagens/windows11-logo.png"
+            width="100"
+            alt="Windows 11"
+        >
+
+        <div class="spinner"></div>
+    </div>
+
+    <div id="conteudo">
+
+        <button class="explorer" aria-label="Abrir conhecimentos">
+            <img
+                src="imagens/windows explorer.png"
+                width="75"
+                alt="Windows Explorer"
+            >
+            <span>Conhecimentos</span>
+        </button>
+
+        <div id="explorer-window">
+
+            <div class="explorer-header">
+                <span>Conhecimentos</span>
+
+                <button
+                    id="fechar-explorer"
+                    aria-label="Fechar Explorer"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div class="explorer-content">
+
+                <div class="skill">
+                    <img src="imagens/html.png" alt="HTML">
+                    <span>HTML</span>
+                </div>
+
+                <div class="skill">
+                    <img src="imagens/css.png" alt="CSS">
+                    <span>CSS</span>
+                </div>
+
+                <div class="skill">
+                    <img src="imagens/javascript.png" alt="JavaScript">
+                    <span>JavaScript</span>
+                </div>
+
+                <div class="skill">
+                    <img src="imagens/csharp.png" alt="C#">
+                    <span>C#</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="cmd-window">
+
+            <div class="cmd-header">
+                <span>Prompt de Comando</span>
+
+                <button
+                    id="fechar-cmd"
+                    aria-label="Fechar Prompt de Comando"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div id="cmd-output">
+
+                <div>
+                    Microsoft Windows [Versão 11.0]
+                </div>
+
+                <div>
+                    (c) Microsoft Corporation. Todos os direitos reservados.
+                </div>
+
+                <br>
+
+                <div>
+                    Digite
+                    <span class="cmd-green">help</span>
+                    para ver os comandos disponíveis.
+                </div>
+
+            </div>
+
+            <div id="cmd-input-line">
+
+                <span>portfolio@GVFB:~$</span>
+
+                <input
+                    type="text"
+                    id="cmd-input"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Comando"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="taskbar">
+
+        <div class="taskbar-center">
+
+            <button
+                class="taskbar-icon"
+                id="start-button"
+                aria-label="Iniciar"
+            >
+                <img
+                    src="imagens/windows11-logo.png"
+                    alt="Windows"
+                >
+            </button>
+
+            <button
+                class="taskbar-icon"
+                id="taskbar-explorer"
+                aria-label="Abrir conhecimentos"
+            >
+                <img
+                    src="imagens/windows explorer.png"
+                    alt="Explorer"
+                >
+            </button>
+
+            <button
+                class="taskbar-icon"
+                id="cmd-button"
+                aria-label="Abrir Prompt de Comando"
+            >
+                <span class="cmd-icon">&gt;_</span>
+            </button>
+
+        </div>
+
+        <div class="taskbar-right">
+
+            <div class="system-icons">
+
+                <span id="time"></span>
+                <span id="date"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
